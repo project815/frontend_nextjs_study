@@ -24,7 +24,7 @@ export const InputContent = styled.input`
   margin-bottom: 14px;
 `;
 
-export const Content = styled.div`
+export const Content = styled.form`
   display: flex;
   flex-direction: column;
   align-items: center;
