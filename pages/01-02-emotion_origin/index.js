@@ -21,6 +21,7 @@ import {
   Youtube,
   Zipcode,
   ZipcodeWrapper,
+  Error,
 } from "../../styles/emotion_origin";
 
 export default function BoardWriteUI() {
@@ -29,7 +30,21 @@ export default function BoardWriteUI() {
     password: "",
   });
 
+  const [userInfoError, setUserInfoError] = useState({
+    userName: "",
+    password: "",
+  });
+
   const [content, setContent] = useState({
+    contentTitle: "",
+    content: "",
+    address: "",
+    youtubeurl: "",
+    image: "",
+    setting: "",
+  });
+
+  const [contentError, setContentError] = useState({
     contentTitle: "",
     content: "",
     address: "",
@@ -44,6 +59,10 @@ export default function BoardWriteUI() {
       ...prevUserInfo,
       userName: newUserName,
     }));
+    setUserInfoError((prev) => ({
+      ...prev,
+      userName: "",
+    }));
   };
 
   const onChangeUserPassword = (data) => {
@@ -51,6 +70,10 @@ export default function BoardWriteUI() {
     setUserInfo((prevUserInfo) => ({
       ...prevUserInfo,
       password: newUserName,
+    }));
+    setUserInfoError((prev) => ({
+      ...prev,
+      password: "",
     }));
   };
 
@@ -60,12 +83,51 @@ export default function BoardWriteUI() {
       ...prevUserInfo,
       contentTitle: newUserName,
     }));
+    setContentError((prev) => ({
+      ...prev,
+      contentTitle: "",
+    }));
   };
 
-  const onClickInfo = (data) => {
-    data.preventDefault();
-    console.log(userInfo);
-    console.log(content);
+  const onChangeContent = (data) => {
+    const newUserName = data.target.value;
+    setContent((prevUserInfo) => ({
+      ...prevUserInfo,
+      content: newUserName,
+    }));
+    setContentError((prev) => ({
+      ...prev,
+      content: "",
+    }));
+  };
+
+  const onClickInfo = () => {
+    console.log("실행");
+    if (userInfo.userName === "") {
+      console.log("비어있음.");
+      setUserInfoError((prevUserInfoError) => ({
+        ...prevUserInfoError,
+        userName: "유저의 이름을 지정해주세요.",
+      }));
+    }
+    if (userInfo.password === "") {
+      setUserInfoError((prevUserInfoError) => ({
+        ...prevUserInfoError,
+        password: "비밀번호를 지정해주세요.",
+      }));
+    }
+    if (content.contentTitle === "") {
+      setContentError((prevUserInfoError) => ({
+        ...prevUserInfoError,
+        contentTitle: "콘텐츠의 제목을 입력해주세요.",
+      }));
+    }
+    if (content.content === "") {
+      setContentError((prevUserInfoError) => ({
+        ...prevUserInfoError,
+        content: "콘텐츠의 내용을 입력해주세요.",
+      }));
+    }
   };
 
   return (
@@ -79,6 +141,7 @@ export default function BoardWriteUI() {
             placeholder="이름을 적어주세요."
             onChange={onChangeUserName}
           />
+          <Error>{userInfoError.userName}</Error>
         </InputWrapper>{" "}
         <InputWrapper>
           <Label>비밀번호</Label>
@@ -87,6 +150,7 @@ export default function BoardWriteUI() {
             placeholder="비밀번호를 작성해주세요."
             onChange={onChangeUserPassword}
           />
+          <Error>{userInfoError.password}</Error>
         </InputWrapper>
       </WriterWrapper>
       <InputWrapper>
@@ -96,10 +160,15 @@ export default function BoardWriteUI() {
           placeholder="제목을 작성해주세요."
           onChange={onChangeContentTitle}
         />
+        <Error>{contentError.contentTitle}</Error>
       </InputWrapper>
       <InputWrapper>
         <Label>내용</Label>
-        <Contents placeholder="내용을 작성해주세요." />
+        <Contents
+          placeholder="내용을 작성해주세요."
+          onChange={onChangeContent}
+        />
+        <Error>{contentError.content}</Error>
       </InputWrapper>
       <InputWrapper>
         <Label>주소</Label>
