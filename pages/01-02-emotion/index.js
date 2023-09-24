@@ -95,8 +95,8 @@ export default function EmotionPage() {
 
           <div>
             <div>메인 설정</div>
-            <input type="radio" /> 유튜브
-            <input type="radio" /> 사진
+            <input type="radio" name="file" /> 유튜브
+            <input type="radio" name="file" /> 사진
           </div>
         </ContentInfo>
         <button type="submit">등록하기</button>

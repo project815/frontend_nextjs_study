@@ -30,7 +30,7 @@ export default function BoardWriteUI() {
         <InputWrapper>
           <Label>작성자</Label>
           <Writer type="text" placeholder="이름을 적어주세요." />
-        </InputWrapper>
+        </InputWrapper>{" "}
         <InputWrapper>
           <Label>비밀번호</Label>
           <Password type="password" placeholder="비밀번호를 작성해주세요." />

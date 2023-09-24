@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 
 export const Wrapper = styled.div`
-  width: 1200px;
+  /* width: 1200px; */
   /* height: 1847px; */
   border: 1px solid black;
   margin: 100px;
@@ -28,19 +28,20 @@ export const WriterWrapper = styled.div`
   flex-direction: row;
   justify-content: space-between;
   padding-top: 40px;
+  gap: 20px;
 `;
 
 export const Writer = styled.input`
-  width: 486px;
-  height: 52px;
-  padding-left: 16px;
+  width: 100%;
+  height: 30px;
   border: 1px solid #bdbdbd;
+  margin-right: 20px;
 `;
 
 export const Password = styled.input`
-  width: 486px;
-  height: 52px;
-  padding-left: 16px;
+  width: 100%;
+  height: 30px;
+
   border: 1px solid #bdbdbd;
 `;
 
@@ -51,21 +52,19 @@ export const Label = styled.div`
 `;
 
 export const InputWrapper = styled.div`
+  width: 100%;
   padding-top: 40px;
 `;
 
 export const Subject = styled.input`
-  width: 996px;
-  height: 52px;
-  padding-left: 16px;
+  width: 100%;
+  height: 30px;
   border: 1px solid #bdbdbd;
 `;
 
 export const Contents = styled.textarea`
-  width: 996px;
+  width: 100%;
   height: 480px;
-  padding-left: 16px;
-  padding: 14px;
   border: 1px solid #bdbdbd;
 `;
 
@@ -76,14 +75,15 @@ export const ZipcodeWrapper = styled.div`
 
 export const Zipcode = styled.input`
   width: 77px;
-  height: 52px;
-  padding-left: 16px;
+  height: 30px;
+
   border: 1px solid #bdbdbd;
 `;
 
 export const SearchButton = styled.button`
   width: 124px;
-  height: 52px;
+  height: 30px;
+
   margin-left: 16px;
   background-color: black;
   cursor: pointer;
@@ -91,28 +91,29 @@ export const SearchButton = styled.button`
 `;
 
 export const Address = styled.input`
-  width: 996px;
-  height: 52px;
+  width: 100%;
+  height: 30px;
+
   margin-top: 16px;
-  padding-left: 16px;
   border: 1px solid #bdbdbd;
 `;
 
 export const Youtube = styled.input`
-  width: 996px;
-  height: 52px;
-  padding-left: 16px;
+  width: 100%;
+  height: 30px;
+
   border: 1px solid #bdbdbd;
 `;
 
 export const ImageWrapper = styled.div`
-  width: 996px;
+  width: 100%;
   padding-top: 40px;
 `;
 
 export const UploadButton = styled.button`
   width: 78px;
-  height: 78px;
+  height: 30px;
+
   background-color: #bdbdbd;
   margin-right: 24px;
   outline: none;
@@ -121,7 +122,7 @@ export const UploadButton = styled.button`
 `;
 
 export const OptionWrapper = styled.div`
-  width: 996px;
+  width: 100%;
   padding-top: 40px;
 `;
 
@@ -145,7 +146,8 @@ export const ButtonWrapper = styled.div`
 
 export const CancelButton = styled.button`
   width: 179px;
-  height: 52px;
+  height: 30px;
+
   background-color: #bdbdbd;
   border: none;
   font-size: 16px;
