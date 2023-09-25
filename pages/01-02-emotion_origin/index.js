@@ -102,31 +102,37 @@ export default function BoardWriteUI() {
   };
 
   const onClickInfo = () => {
-    console.log("실행");
-    if (userInfo.userName === "") {
-      console.log("비어있음.");
+    if (!userInfo.userName) {
       setUserInfoError((prevUserInfoError) => ({
         ...prevUserInfoError,
         userName: "유저의 이름을 지정해주세요.",
       }));
     }
-    if (userInfo.password === "") {
+    if (!userInfo.password) {
       setUserInfoError((prevUserInfoError) => ({
         ...prevUserInfoError,
         password: "비밀번호를 지정해주세요.",
       }));
     }
-    if (content.contentTitle === "") {
+    if (!content.contentTitle) {
       setContentError((prevUserInfoError) => ({
         ...prevUserInfoError,
         contentTitle: "콘텐츠의 제목을 입력해주세요.",
       }));
     }
-    if (content.content === "") {
+    if (!content.content) {
       setContentError((prevUserInfoError) => ({
         ...prevUserInfoError,
         content: "콘텐츠의 내용을 입력해주세요.",
       }));
+    }
+    if (
+      userInfo.userName &&
+      userInfo.password &&
+      content.contentTitle &&
+      content.content
+    ) {
+      alert("컨텐츠가 등록되었습니다.");
     }
   };
 
