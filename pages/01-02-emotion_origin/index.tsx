@@ -23,45 +23,93 @@ import {
   ZipcodeWrapper,
   Error,
 } from "../../styles/emotion_origin";
+import { gql, useMutation } from "@apollo/client";
+
+interface CreateBoardInput {
+  writer: string;
+  password: string;
+  title: string;
+  contents: string;
+  youtubeUrl: string;
+  boardAddress: {
+    zipcode: string;
+    address: string;
+    addressDetail: string;
+  };
+  images: string;
+}
+
+const CREATEBOARD = gql`
+  # Write your query or mutation here
+  mutation createBoard($createBoardInput: CreateBoardInput!) {
+    createBoard(createBoardInput: $createBoardInput) {
+      _id
+      writer
+      title
+      contents
+      youtubeUrl
+      likeCount
+      dislikeCount
+      images
+      boardAddress {
+        _id
+        createdAt
+        updatedAt
+      }
+      user {
+        _id
+        email
+        name
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+      deletedAt
+    }
+  }
+`;
 
 export default function BoardWriteUI() {
-  const [userInfo, setUserInfo] = useState({
-    userName: "",
+  const [createBoard] = useMutation(CREATEBOARD);
+
+  const [userInfo, setUserInfo] = useState<CreateBoardInput>({
+    writer: "",
     password: "",
+    title: "",
+    contents: "",
+    youtubeUrl: "",
+    boardAddress: {
+      zipcode: "",
+      address: "",
+      addressDetail: "",
+    },
+    images: "",
   });
 
-  const [userInfoError, setUserInfoError] = useState({
-    userName: "",
+  const [userInfoError, setUserInfoError] = useState<CreateBoardInput>({
+    writer: "",
     password: "",
+    title: "",
+    contents: "",
+    youtubeUrl: "",
+    boardAddress: {
+      zipcode: "",
+      address: "",
+      addressDetail: "",
+    },
+    images: "",
   });
 
-  const [content, setContent] = useState({
-    contentTitle: "",
-    content: "",
-    address: "",
-    youtubeurl: "",
-    image: "",
-    setting: "",
-  });
-
-  const [contentError, setContentError] = useState({
-    contentTitle: "",
-    content: "",
-    address: "",
-    youtubeurl: "",
-    image: "",
-    setting: "",
-  });
-
-  const onChangeUserName = (data) => {
+  const onChangeUserWriter = (data) => {
     const newUserName = data.target.value;
     setUserInfo((prevUserInfo) => ({
       ...prevUserInfo,
-      userName: newUserName,
+      writer: newUserName,
     }));
     setUserInfoError((prev) => ({
       ...prev,
-      userName: "",
+      writer: "",
     }));
   };
 
@@ -79,33 +127,34 @@ export default function BoardWriteUI() {
 
   const onChangeContentTitle = (data) => {
     const newUserName = data.target.value;
-    setContent((prevUserInfo) => ({
+    setUserInfo((prevUserInfo) => ({
       ...prevUserInfo,
-      contentTitle: newUserName,
+      title: newUserName,
     }));
-    setContentError((prev) => ({
+    setUserInfoError((prev) => ({
       ...prev,
-      contentTitle: "",
+      title: "",
     }));
   };
 
   const onChangeContent = (data) => {
     const newUserName = data.target.value;
-    setContent((prevUserInfo) => ({
+    setUserInfo((prevUserInfo) => ({
       ...prevUserInfo,
-      content: newUserName,
+      contents: newUserName,
     }));
-    setContentError((prev) => ({
+    setUserInfoError((prev) => ({
       ...prev,
       content: "",
     }));
   };
 
-  const onClickInfo = () => {
-    if (!userInfo.userName) {
+  const onClickInfo = async () => {
+    console.log("click");
+    if (!userInfo.writer) {
       setUserInfoError((prevUserInfoError) => ({
         ...prevUserInfoError,
-        userName: "유저의 이름을 지정해주세요.",
+        writer: "유저의 이름을 지정해주세요.",
       }));
     }
     if (!userInfo.password) {
@@ -114,25 +163,43 @@ export default function BoardWriteUI() {
         password: "비밀번호를 지정해주세요.",
       }));
     }
-    if (!content.contentTitle) {
-      setContentError((prevUserInfoError) => ({
+    if (!userInfo.title) {
+      setUserInfoError((prevUserInfoError) => ({
         ...prevUserInfoError,
-        contentTitle: "콘텐츠의 제목을 입력해주세요.",
+        title: "콘텐츠의 제목을 입력해주세요.",
       }));
     }
-    if (!content.content) {
-      setContentError((prevUserInfoError) => ({
+    if (!userInfo.contents) {
+      setUserInfoError((prevUserInfoError) => ({
         ...prevUserInfoError,
-        content: "콘텐츠의 내용을 입력해주세요.",
+        contents: "콘텐츠의 내용을 입력해주세요.",
       }));
     }
     if (
-      userInfo.userName &&
+      userInfo.writer &&
       userInfo.password &&
-      content.contentTitle &&
-      content.content
+      userInfo.title &&
+      userInfo.contents
     ) {
-      alert("컨텐츠가 등록되었습니다.");
+      const result = await createBoard({
+        variables: {
+          createBoardInput: {
+            writer: userInfo.writer,
+            password: userInfo.password,
+            title: userInfo.title,
+            contents: userInfo.contents,
+          },
+        },
+      })
+        .then((res) => {
+          console.log("res : ", res);
+          alert("컨텐츠가 등록되었습니다.");
+        })
+        .catch((err) => {
+          console.log("error : ", err);
+        });
+
+      console.log("result : ", result);
     }
   };
 
@@ -145,9 +212,9 @@ export default function BoardWriteUI() {
           <Writer
             type="text"
             placeholder="이름을 적어주세요."
-            onChange={onChangeUserName}
+            onChange={onChangeUserWriter}
           />
-          <Error>{userInfoError.userName}</Error>
+          <Error>{userInfoError.writer}</Error>
         </InputWrapper>{" "}
         <InputWrapper>
           <Label>비밀번호</Label>
@@ -166,7 +233,7 @@ export default function BoardWriteUI() {
           placeholder="제목을 작성해주세요."
           onChange={onChangeContentTitle}
         />
-        <Error>{contentError.contentTitle}</Error>
+        <Error>{userInfoError.title}</Error>
       </InputWrapper>
       <InputWrapper>
         <Label>내용</Label>
@@ -174,7 +241,7 @@ export default function BoardWriteUI() {
           placeholder="내용을 작성해주세요."
           onChange={onChangeContent}
         />
-        <Error>{contentError.content}</Error>
+        <Error>{userInfoError.contents}</Error>
       </InputWrapper>
       <InputWrapper>
         <Label>주소</Label>
