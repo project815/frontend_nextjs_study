@@ -22,7 +22,7 @@ import {
   Zipcode,
   ZipcodeWrapper,
   Error,
-} from "../../styles/emotion_origin";
+} from "../../src/styles/emotion_origin";
 import { gql, useMutation } from "@apollo/client";
 
 interface CreateBoardInput {
