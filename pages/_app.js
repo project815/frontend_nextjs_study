@@ -7,6 +7,8 @@ import {
 
 export default function App({ Component, pageProps }) {
   const client = new ApolloClient({
+    // uri: "https://backendonline.codebootcamp.co.kr/graphql",
+
     uri: "http://practice.codebootcamp.co.kr/graphql",
     cache: new InMemoryCache(),
   });
