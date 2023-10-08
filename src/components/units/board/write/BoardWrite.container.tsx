@@ -1,16 +1,7 @@
-import { gql, useMutation } from "@apollo/client";
+import { useMutation } from "@apollo/client";
 import { useEffect, useState } from "react";
+import { CREATEBOARD } from "./BoardWrite.query";
 import BoardWriteUI from "./BoardWrite.presenter";
-
-const CREATEBOARD = gql`
-  mutation createBoard($writer: String, $title: String, $contents: String) {
-    createBoard(writer: $writer, title: $title, contents: $contents) {
-      _id
-      message
-      number
-    }
-  }
-`;
 
 export default function BoardWrite() {
   //자바스크립트 영역
@@ -38,7 +29,9 @@ export default function BoardWrite() {
   //HTML 영역
   return (
     <>
+      <div>eeeeeeee</div>
       <BoardWriteUI onClickSubmit={onClickSubmit} setInfo={setInfo} />
     </>
   );
 }
+``;

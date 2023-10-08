@@ -15,6 +15,7 @@ export default function App({ Component, pageProps }) {
 
   return (
     <ApolloProvider client={client}>
+      <div>qqqqqq</div>
       <Component {...pageProps} />
     </ApolloProvider>
   );

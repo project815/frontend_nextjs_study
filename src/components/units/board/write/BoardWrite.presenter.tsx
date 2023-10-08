@@ -1,3 +1,9 @@
+// import { BlueButton, RedInput } from "./BoardWrite.styles";
+import * as S from "./BoardWrite.styles";
+
+//export defalut 와 export를 함쎄 사용하는 방법.
+import qqq, { BlueButton, RedInput } from "./BoardWrite.styles";
+
 export default function BoardWriteUI(props) {
   console.log("props : ", props);
   const { onClickSubmit, setInfo } = props;
@@ -6,10 +12,11 @@ export default function BoardWriteUI(props) {
   //HTML 영역
   return (
     <>
+      <div>rrrrrrrr</div>
       <form onSubmit={onClickSubmit}>
         <div>
           <span>writer : </span>
-          <input
+          <S.RedInput
             type="text"
             onChange={(event) =>
               setInfo((prevInfo) => ({
@@ -21,7 +28,7 @@ export default function BoardWriteUI(props) {
         </div>
         <div>
           <span>title : </span>
-          <input
+          <S.RedInput
             type="text"
             onChange={(event) =>
               setInfo((prevInfo) => ({
@@ -33,7 +40,7 @@ export default function BoardWriteUI(props) {
         </div>
         <div>
           <span>contents : </span>
-          <input
+          <S.RedInput
             type="text"
             onChange={(event) =>
               setInfo((prevInfo) => ({
@@ -43,7 +50,7 @@ export default function BoardWriteUI(props) {
             }
           />
         </div>
-        <button>제출</button>
+        <S.BlueButton>제출</S.BlueButton>
       </form>
       <button onClick={onClickSubmit}>GRAPHQL</button>
     </>
