@@ -6,7 +6,7 @@ import qqq, { BlueButton, RedInput } from "./BoardWrite.styles";
 
 export default function BoardWriteUI(props) {
   console.log("props : ", props);
-  const { onClickSubmit, setInfo } = props;
+  const { onClickSubmit, setInfo, isfill } = props;
   //자바스크립트 영역
 
   //HTML 영역
@@ -17,6 +17,7 @@ export default function BoardWriteUI(props) {
         <div>
           <span>writer : </span>
           <S.RedInput
+            isfill={isfill}
             border-color="red"
             type="text"
             onChange={(event) =>
@@ -30,6 +31,7 @@ export default function BoardWriteUI(props) {
         <div>
           <span>title : </span>
           <S.RedInput
+            isfill={isfill}
             type="text"
             onChange={(event) =>
               setInfo((prevInfo) => ({
@@ -42,6 +44,7 @@ export default function BoardWriteUI(props) {
         <div>
           <span>contents : </span>
           <S.RedInput
+            isfill={isfill}
             type="text"
             onChange={(event) =>
               setInfo((prevInfo) => ({
@@ -51,11 +54,11 @@ export default function BoardWriteUI(props) {
             }
           />
         </div>
-        <S.BlueButton backgroundColor="red" zzz={true}>
-          제출
-        </S.BlueButton>
+        <S.BlueButton isfill={isfill}>제출</S.BlueButton>
       </form>
-      <S.BlueButton onClick={onClickSubmit}>GRAPHQL</S.BlueButton>
+      <S.BlueButton isfill={isfill} onClick={onClickSubmit}>
+        GRAPHQL
+      </S.BlueButton>
     </>
   );
 }

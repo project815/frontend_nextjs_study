@@ -1,12 +1,14 @@
 import styled from "@emotion/styled";
 
 export const RedInput = styled.input`
-  border-color: red;
+  border-color: ${(props) => {
+    return props.isfill ? "red" : "default";
+  }};
 `;
 
 export const BlueButton = styled.button`
   background-color: ${(props) => {
-    return props.zzz ? "red" : "default";
+    return props.isfill ? "red" : "default";
   }};
 `;
 
