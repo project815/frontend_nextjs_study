@@ -1,8 +1,7 @@
-export default function qqq() {
+export default function examplePage() {
   return (
     <div>
       <div>helloworld</div>
-      <button>버튼</button>
     </div>
   );
 }
