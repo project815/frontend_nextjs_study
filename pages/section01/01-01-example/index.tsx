@@ -1,4 +1,4 @@
-export default function examplePage() {
+export default function ExamplePage() {
   return (
     <div>
       <div>helloworld</div>
