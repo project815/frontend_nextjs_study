@@ -5,7 +5,7 @@ export default function EmotionPage() {
       <MyEmail>이메일</MyEmail>
       <MyInput />
       <MyInput />
-      <img src="/next.svg" />
+      <img src="/next.svg" width="100" />
     </div>
   );
 }
