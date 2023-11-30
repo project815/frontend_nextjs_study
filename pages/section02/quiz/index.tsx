@@ -1,5 +1,12 @@
 import { useRef, useState } from "react";
 
+import {
+  InputRowGroup,
+  QuizLayOut,
+  InputColumnGroup,
+  Error,
+} from "../../../src/styles/02-quiz";
+
 export default function Section02QuizPage() {
   let elementText: string = "안녕하세요.";
   let elementCount: number = 0;
@@ -10,6 +17,14 @@ export default function Section02QuizPage() {
   const [stateAuthNumber, setStateAuthNumber] = useState<string>("000000");
   const authNumber = useRef("000000");
 
+  const [email, setEmail] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
+  const [checkPassword, setCheckPassword] = useState<string>("");
+
+  const [emailError, setEmailError] = useState<string>("Error");
+  const [passwordError, setPasswordError] = useState<string>("Error");
+
+  //element
   const onClickTextElementById = () => {
     document.getElementById("elementtext").innerText = "반갑습니다.";
   };
@@ -29,18 +44,52 @@ export default function Section02QuizPage() {
     document.getElementById("elementauthnumber").innerText = elementAuthNumber;
   };
 
+  //UseState
   const onClickStateChange = () => {
     setstateText("반갑습니다.");
   };
   const onClikckStateCount = () => {
     setStateCount(stattCount + 1);
   };
-
+  //useRef
   const onChangeStateAuthNumber = (e: React.ChangeEvent<HTMLInputElement>) => {
     authNumber.current = e.target.value;
   };
   const onClickStateAuthNumber = () => {
     setStateAuthNumber(authNumber.current);
+  };
+  const onChangeEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setEmail(e.target.value);
+  };
+  const onChangePassword = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setPassword(e.target.value);
+  };
+  const onChangeCheckPassword = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setCheckPassword(e.target.value);
+  };
+  const onSubmitInfo = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (!email.includes("@") || !password || !(password === checkPassword)) {
+      if (!email.includes("@")) {
+        setEmailError("이메일에 @가 없습니다.");
+      }
+      if (!password) {
+        setPasswordError("비밀번호를 입력해주세요.");
+      }
+      if (!(password === checkPassword)) {
+        setPasswordError("비밀번호가 일치하지 않습니다.");
+      }
+
+      console.log("??");
+      return;
+    } else {
+      setEmailError("");
+      setPasswordError("");
+    }
+
+    console.log(
+      `email : ${email}, password : ${password}, checkPassword : ${checkPassword}`
+    );
   };
 
   return (
@@ -109,7 +158,28 @@ export default function Section02QuizPage() {
         </ul>
       </div>
 
-      <div></div>
+      <QuizLayOut onSubmit={onSubmitInfo}>
+        <InputRowGroup>
+          <span>이메일 : </span>
+          <InputColumnGroup>
+            <input type="text" onChange={onChangeEmail} />
+            <Error>{emailError}</Error>
+          </InputColumnGroup>
+        </InputRowGroup>
+        <InputRowGroup>
+          <span>비밀번호 : </span>
+
+          <InputColumnGroup>
+            <input type="password" onChange={onChangePassword} />
+            <Error>{passwordError}</Error>
+          </InputColumnGroup>
+        </InputRowGroup>
+        <InputRowGroup>
+          <span>비밀번호 확인 : </span>
+          <input type="password" onChange={onChangeCheckPassword} />
+        </InputRowGroup>
+        <button type="submit">회원가입</button>
+      </QuizLayOut>
 
       <h2>5. 고난도. 잇츠로드 </h2>
     </div>
