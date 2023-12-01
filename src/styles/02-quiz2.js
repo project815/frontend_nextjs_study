@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 
-export const Quiz2LayOut = styled.div`
+export const Quiz2LayOut = styled.form`
   width: 640px;
   height: 1138px;
   display: flex;

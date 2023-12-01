@@ -17,14 +17,49 @@ import {
   KakaoLoginButton,
   KakaoLoginText,
 } from "../../../src/styles/02-quiz2";
+import { useEffect, useState } from "react";
 
-const test = () => {
-  console.log("click");
-};
 export default function Section02Quiz2Page() {
+  const [email, setEmail] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
+
+  const [emailError, setEmailError] = useState<string>("");
+  const [passwordError, setPasswordError] = useState<string>("");
+
+  const onChangeEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setEmail(e.target.value);
+  };
+  const onChangePassword = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setPassword(e.target.value);
+  };
+
+  useEffect(() => {
+    if (!email) setEmailError("이메일 주소를 다시 확인해주세요.");
+    else setEmailError("");
+    if (!password)
+      setPasswordError("8~16자의 영문, 숫자, 특수 문자만 사용 가능합니다.");
+    else setPasswordError("");
+  }, [email, password]);
+
+  const onSubmitInfo = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    if (!email.includes("@") || !(password.length >= 8)) {
+      if (!email.includes("@")) setEmailError("이메일에 @가 없습니다.");
+      if (!(password.length >= 8))
+        setPasswordError("비밀번호가 최소 8자리 이상이어야 합니다.");
+      return;
+    } else {
+      setEmailError("");
+      setPasswordError("");
+    }
+
+    console.log(`email : ${email}, password : ${password}`);
+  };
+
   return (
     <div>
-      <Quiz2LayOut>
+      <Quiz2LayOut onSubmit={onSubmitInfo}>
         <Image
           style={{ position: "absolute" }}
           alt=""
@@ -52,7 +87,7 @@ export default function Section02Quiz2Page() {
                 width: "100%",
               }}
             >
-              <SingInput />
+              <SingInput onChange={onChangeEmail} type="text" />
               <div
                 style={{
                   position: "relative",
@@ -65,7 +100,7 @@ export default function Section02Quiz2Page() {
                   lineHeight: "normal",
                 }}
               >
-                이메일 주소를 다시 확인해주세요.
+                {emailError}
               </div>
             </div>
 
@@ -90,7 +125,7 @@ export default function Section02Quiz2Page() {
                 width: "100%",
               }}
             >
-              <SingInput />
+              <SingInput onChange={onChangePassword} type="password" />
               <div
                 style={{
                   position: "relative",
@@ -98,7 +133,7 @@ export default function Section02Quiz2Page() {
                   marginTop: "8px",
                 }}
               >
-                8~16자의 영문, 숫자, 특수 문자만 사용 가능합니다.
+                {passwordError}
               </div>
             </div>
 
@@ -108,7 +143,7 @@ export default function Section02Quiz2Page() {
               style={{ position: "relative" }}
             />
           </div>
-          <LoginButton onClick={test}>
+          <LoginButton type="submit">
             <LoginText>로그인</LoginText>
           </LoginButton>
           <div style={{ position: "relative", color: "white" }}>
