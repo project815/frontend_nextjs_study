@@ -2,13 +2,14 @@ import { gql, useMutation } from "@apollo/client";
 
 const CREATEBOARD = gql`
   mutation {
-    createBoard(writer: "철수", title: "안녕하세요", contents: "반갑습니다.") {
+    createBoard(writer: "안녕", title: 123, contents: "반갑습니다.") {
       _id
       number
       message
     }
   }
 `;
+
 export default function GraphQlMutation() {
   const [createBoard] = useMutation(CREATEBOARD);
 
@@ -20,6 +21,7 @@ export default function GraphQlMutation() {
       console.log("error : ", error);
     }
   };
+
   return (
     <div>
       <button onClick={onClickCreateBoard}>CREATEBOARD</button>
