@@ -1,4 +1,5 @@
 import { gql, useMutation, useQuery } from "@apollo/client";
+import axios from "axios";
 import { useState } from "react";
 
 const CREATEBOARD = gql`
@@ -18,13 +19,6 @@ export default function Section04Quiz() {
   const [title, setTitle] = useState("");
   const [contents, setContents] = useState("");
 
-  const onClickFetchProfile = async () => {
-    const result = await createBoard({
-      variables: { writer, title, contents },
-    });
-    console.log("data : ", result);
-  };
-
   const onChangeWriter = (e: React.ChangeEvent<HTMLInputElement>) => {
     setWriter(e.target.value);
   };
@@ -33,6 +27,18 @@ export default function Section04Quiz() {
   };
   const onChangeContents = (e: React.ChangeEvent<HTMLInputElement>) => {
     setContents(e.target.value);
+  };
+
+  const onClickCreateBoard = async () => {
+    const result = await createBoard({
+      variables: { writer, title, contents },
+    });
+    console.log("data : ", result);
+  };
+
+  const onClickGetData = async () => {
+    const result = await axios.get("https://koreanjson.com/posts/2");
+    console.log("resulte : ", result);
   };
   //## 1. GRAPHQL-API 요청하기
 
@@ -64,7 +70,8 @@ export default function Section04Quiz() {
         </div>
       </div>
 
-      <button onClick={onClickFetchProfile}>GRAPHQL-API 요청하기</button>
+      <button onClick={onClickCreateBoard}>[ GRAPHQL-API 요청하기 ]</button>
+      <button onClick={onClickGetData}>[ REST-API 요청하기 ]</button>
     </div>
   );
 }
