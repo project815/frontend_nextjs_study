@@ -6,7 +6,7 @@ const FETCHBOARD = gql`
       writer
       title
       contents
-    }
+    } 
   }
 `;
 export default function StaticRoutingMovedPage3() {
