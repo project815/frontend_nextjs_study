@@ -20,11 +20,6 @@ export default function GraphQlMutatioArgsPage() {
         title: "asdfasdfasdfsadf",
         contents: "반갑습니다",
       },
-      // variables: {
-      //   writer: "안녕",
-      //   title: 123,
-      //   contents: "반갑습니다",
-      // },
     });
     console.log("data : ", result);
   };
