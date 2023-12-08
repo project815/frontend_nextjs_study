@@ -5,8 +5,8 @@ export const RedInput = styled.input`
   opacity: 0.5;
 `;
 
-export const BlueButton = styled.button<{ mycolor: string }>`
-  background-color: ${(props) => props.mycolor};
+export const BlueButton = styled.button<{ isActive: boolean }>`
+  background-color: ${(props) => (props.isActive ? "green" : "red")};
 `;
 
 const qqq = "철수당";

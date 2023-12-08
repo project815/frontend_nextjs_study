@@ -1,10 +1,11 @@
 import { useMutation } from "@apollo/client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import BoardWriteUI from "./BoardWrite.presenter";
 import { CREATEBOARD } from "./BoardWrite.query";
 
 export default function BoardWrite() {
+  const [isActive, setIsActive] = useState<boolean>(false);
   const [writer, setWriter] = useState<string>("");
   const [title, setTitle] = useState<string>("");
   const [contents, setContents] = useState<string>("");
@@ -24,6 +25,7 @@ export default function BoardWrite() {
 
   const onChangeWriter = (e: React.ChangeEvent<HTMLInputElement>) => {
     setWriter(e.target.value);
+    console.log("writer : ", writer);
   };
   const onChangeTitle = (e: React.ChangeEvent<HTMLInputElement>) => {
     setTitle(e.target.value);
@@ -31,12 +33,23 @@ export default function BoardWrite() {
   const onChangeContents = (e: React.ChangeEvent<HTMLInputElement>) => {
     setContents(e.target.value);
   };
+
+  useEffect(() => {
+    console.log(`writer : ${writer}, title : ${title}, contents : ${contents}`);
+    if (writer && title && contents) {
+      setIsActive(true);
+    } else {
+      setIsActive(false);
+    }
+  }, [writer, title, contents]);
+
   return (
     <BoardWriteUI
       onClickSubmit={onClickSubmit}
-      onChangeWrite={onChangeWriter}
+      onChangeWriter={onChangeWriter}
       onChangeTitle={onChangeTitle}
-      onChnageContents={onChangeContents}
+      onChangeContents={onChangeContents}
+      isActive={isActive}
     />
   );
 }
