@@ -1,37 +1,42 @@
 import { useMutation } from "@apollo/client";
-import { useEffect, useState } from "react";
-import { CREATEBOARD } from "./BoardWrite.query";
+import { useState } from "react";
+
 import BoardWriteUI from "./BoardWrite.presenter";
+import { CREATEBOARD } from "./BoardWrite.query";
 
 export default function BoardWrite() {
-  //자바스크립트 영역
+  const [writer, setWriter] = useState<string>("");
+  const [title, setTitle] = useState<string>("");
+  const [contents, setContents] = useState<string>("");
+
   const [createBoard] = useMutation(CREATEBOARD);
 
-  const [info, setInfo] = useState({ writer: "", title: "", contents: "" });
-  const onClickSubmit = async (event) => {
-    console.log("실행");
-    event.preventDefault();
+  const onClickSubmit = async () => {
     const result = await createBoard({
       variables: {
-        // variables $역할
-        writer: info.writer,
-        title: info.title,
-        contents: info.contents,
+        writer: writer,
+        title: title,
+        contents: contents,
       },
     });
-
-    alert(result.data.createBoard.message);
+    console.log("data : ", result);
   };
 
-  useEffect(() => {
-    console.log("info : ", info);
-  }, [info]);
-  //HTML 영역
+  const onChangeWriter = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setWriter(e.target.value);
+  };
+  const onChangeTitle = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setTitle(e.target.value);
+  };
+  const onChangeContents = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setContents(e.target.value);
+  };
   return (
-    <>
-      <div>eeeeeeee</div>
-      <BoardWriteUI onClickSubmit={onClickSubmit} setInfo={setInfo} />
-    </>
+    <BoardWriteUI
+      onClickSubmit={onClickSubmit}
+      onChangeWrite={onChangeWriter}
+      onChangeTitle={onChangeTitle}
+      onChnageContents={onChangeContents}
+    />
   );
 }
-``;

@@ -1,58 +1,14 @@
-// import { BlueButton, RedInput } from "./BoardWrite.styles";
-import * as S from "./BoardWrite.styles";
-
-//export defalut 와 export를 함쎄 사용하는 방법.
-import qqq, { BlueButton, RedInput } from "./BoardWrite.styles";
+import { BlueButton, RedInput } from "./BoardWrite.styles";
 
 export default function BoardWriteUI(props) {
-  console.log("props : ", props);
-  const { onClickSubmit, setInfo } = props;
-  //자바스크립트 영역
-
-  //HTML 영역
+  const { onClickSubmit, onChangeWriter, onChangeTitle, onChangeContents } =
+    props;
   return (
-    <>
-      <div>rrrrrrrr</div>
-      <form onSubmit={onClickSubmit}>
-        <div>
-          <span>writer : </span>
-          <S.RedInput
-            type="text"
-            onChange={(event) =>
-              setInfo((prevInfo) => ({
-                ...prevInfo,
-                writer: event.target.value,
-              }))
-            }
-          />
-        </div>
-        <div>
-          <span>title : </span>
-          <S.RedInput
-            type="text"
-            onChange={(event) =>
-              setInfo((prevInfo) => ({
-                ...prevInfo,
-                title: event.target.value,
-              }))
-            }
-          />
-        </div>
-        <div>
-          <span>contents : </span>
-          <S.RedInput
-            type="text"
-            onChange={(event) =>
-              setInfo((prevInfo) => ({
-                ...prevInfo,
-                contents: event.target.value,
-              }))
-            }
-          />
-        </div>
-        <S.BlueButton>제출</S.BlueButton>
-      </form>
-      <button onClick={onClickSubmit}>GRAPHQL</button>
-    </>
+    <div style={{ width: "50%", display: "flex", flexDirection: "column" }}>
+      작성자 : <RedInput type="text" onChange={onChangeWriter} />
+      작성자 : <RedInput type="text" onChange={onChangeTitle} />
+      작성자 : <RedInput type="text" onChange={onChangeContents} />
+      <BlueButton onClick={onClickSubmit}>CREATEBOARD</BlueButton>
+    </div>
   );
 }
