@@ -1,4 +1,4 @@
-import { gql, useQuery } from "@apollo/client";
+import { gql, useMutation, useQuery } from "@apollo/client";
 
 const FETCHBOARDS = gql`
   query {
@@ -11,11 +11,31 @@ const FETCHBOARDS = gql`
   }
 `;
 
+const DELETEBOARDS = gql`
+  mutation deleteBoard($number: Int) {
+    deleteBoard(number: $number) {
+      _id
+      number
+      message
+    }
+  }
+`;
+
 export default function MapBoardsDeletePage() {
   const { data } = useQuery(FETCHBOARDS);
+  const [deleteBoard] = useMutation(DELETEBOARDS);
   console.log("data : ", data);
 
-  const onClickDelete = () => {};
+  const onClickDelete = (
+    e: React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ) => {
+    deleteBoard({
+      variables: {
+        number: Number(e.currentTarget.id),
+      },
+      refetchQueries: [{ query: FETCHBOARDS }],
+    });
+  };
   return (
     <div>
       {/* {특별한 이유가 없으면 Fragment로 감싸자. <div>조금 느려짐} */}
@@ -36,7 +56,13 @@ export default function MapBoardsDeletePage() {
                 내용 : {i ? i.contents : ""}
               </span>
               <span>
-                <button style={{ marginLeft: "10px" }}>삭제</button>
+                <button
+                  id={i.number}
+                  style={{ marginLeft: "10px" }}
+                  onClick={onClickDelete}
+                >
+                  삭제
+                </button>
               </span>
             </div>
           )
