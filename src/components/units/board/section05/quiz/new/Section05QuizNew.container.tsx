@@ -28,6 +28,7 @@ export default function Section05QuizNew() {
 
   const onClickCreateProduct = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    console.log(">>??");
     if (!seller || !name || !detail || !price) {
       alert("입력되지 않은 정보가 있습니다.");
       return;
