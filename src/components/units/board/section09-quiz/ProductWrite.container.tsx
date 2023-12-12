@@ -4,10 +4,6 @@ import { useRouter } from "next/router";
 
 import Section09QuizProductUI from "./ProductWrite.presenter";
 import { CREATEPRODUCT, UPDATEPRODUCT } from "./ProductWrite.query";
-//1.수정된 사항 없으면 경고 창 띄우기
-//2. 뒤로가기 버튼 추가.
-//3. 변경된 것에 대해서만
-//4. 판매자에 대한 로직 분할 O
 export default function Section09QuizProduct(props) {
   const { isEdit, defaultValue } = props;
   const router = useRouter();
@@ -33,35 +29,53 @@ export default function Section09QuizProduct(props) {
     setPrice(Number(e.target.value));
   };
 
-  const onClickCreateProduct = async () => {
-    const result = await createProudct({
-      variables: {
-        seller: seller,
-        createProductInput: {
-          name: name,
-          detail: detail,
-          price: price,
-        },
-      },
-    });
+  const onClickMoveToBack = () => {
+    router.back();
+  };
 
-    router.push(`/section09/quiz/${result.data.createProduct._id}`);
+  const onClickCreateProduct = async () => {
+    try {
+      const result = await createProudct({
+        variables: {
+          seller: seller,
+          createProductInput: {
+            name: name,
+            detail: detail,
+            price: price,
+          },
+        },
+      });
+
+      router.push(`/section09/quiz/${result.data.createProduct._id}`);
+    } catch (error) {
+      console.log("error : ", error);
+    }
   };
   const onClickUpdateProduct = async () => {
-    const result = await updateProduct({
-      variables: {
-        productId: router.query.id,
-        updateProductInput: {
-          name: name,
-          detail: detail,
-          price: price,
-        },
-      },
-    });
+    const myVariables: {
+      productId: string | string[];
+      updateProductInput: {
+        name?: string;
+        detail?: string;
+        price?: number;
+      };
+    } = {
+      productId: router.query.id,
+      updateProductInput: {},
+    };
+    if (name) myVariables.updateProductInput.name = name;
+    if (detail) myVariables.updateProductInput.detail = detail;
+    if (price) myVariables.updateProductInput.price = price;
 
-    console.log("Data : ", result);
-
-    router.push(`/section09/quiz/${result.data.updateProduct._id}`);
+    try {
+      const result = await updateProduct({
+        variables: myVariables,
+      });
+      router.push(`/section09/quiz/${result.data.updateProduct._id}`);
+    } catch (error) {
+      alert("변경사항이 없습니다.");
+      console.log("error : ", error);
+    }
   };
 
   return (
@@ -72,6 +86,7 @@ export default function Section09QuizProduct(props) {
       onChangeName={onChangeName}
       onChangeDetail={onChangeDetail}
       onChangePrice={onChangePrice}
+      onClickMoveToBack={onClickMoveToBack}
       onCilckSubmit={isEdit ? onClickUpdateProduct : onClickCreateProduct}
     />
   );

@@ -6,6 +6,7 @@ export default function Section09QuizProductUI(props) {
     onChangeName,
     onChangeDetail,
     onChangePrice,
+    onClickMoveToBack,
     onCilckSubmit,
   } = props;
 
@@ -48,7 +49,11 @@ export default function Section09QuizProductUI(props) {
           defaultValue={defaultValue?.price}
         />
       </div>
-      <button onClick={onCilckSubmit}>{isEdit ? "수정" : "생성"}하기</button>
+
+      <div>
+        <button onClick={onClickMoveToBack}>뒤로가기</button>
+        <button onClick={onCilckSubmit}>{isEdit ? "수정" : "생성"}하기</button>
+      </div>
     </div>
   );
 }
