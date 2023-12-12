@@ -4,13 +4,16 @@ import { useRouter } from "next/router";
 
 import Section09QuizProductUI from "./ProductWrite.presenter";
 import { CREATEPRODUCT, UPDATEPRODUCT } from "./ProductWrite.query";
-
+//1.수정된 사항 없으면 경고 창 띄우기
+//2. 뒤로가기 버튼 추가.
+//3. 변경된 것에 대해서만
+//4. 판매자에 대한 로직 분할 O
 export default function Section09QuizProduct(props) {
   const { isEdit, defaultValue } = props;
   const router = useRouter();
 
   const [seller, setSeller] = useState<string>(defaultValue?.seller);
-  const [name, setName] = useState<string>(defaultValue?.newm);
+  const [name, setName] = useState<string>(defaultValue?.name);
   const [detail, setDetail] = useState<string>(defaultValue?.detail);
   const [price, setPrice] = useState<number>(defaultValue?.price);
 

@@ -14,6 +14,8 @@ export default function Section09QuizProductDetailPage() {
     router.push(`/section09/quiz/${router.query.id}/edit`);
   };
 
+  console.log("data : ", data);
+
   return (
     <>
       <div>판매자 : {data?.fetchProduct.seller}</div>

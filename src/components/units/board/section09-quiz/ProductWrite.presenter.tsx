@@ -9,17 +9,21 @@ export default function Section09QuizProductUI(props) {
     onCilckSubmit,
   } = props;
 
-  console.log("isEdit : ", isEdit);
   return (
     <div>
-      <div>
-        판매자 :
-        <input
-          type="text"
-          onChange={onChangeSeller}
-          defaultValue={defaultValue?.seller}
-        />
-      </div>
+      {isEdit ? (
+        " "
+      ) : (
+        <div>
+          판매자 :
+          <input
+            type="text"
+            onChange={onChangeSeller}
+            defaultValue={defaultValue?.seller}
+          />
+        </div>
+      )}
+
       <div>
         상품 이름 :
         <input
