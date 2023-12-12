@@ -36,3 +36,4 @@ export default function GraphQlMutationProduct() {
     </div>
   );
 }
+3;

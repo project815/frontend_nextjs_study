@@ -6,12 +6,12 @@ import { CREATEBOARD, UPDATEBOARD } from "./BoardWrite.query";
 import { useRouter } from "next/router";
 
 export default function BoardWrite(props) {
-  const { isEdit } = props;
+  const { isEdit, defaultValue } = props;
   const router = useRouter();
 
-  const [writer, setWriter] = useState<string>("");
-  const [title, setTitle] = useState<string>("");
-  const [contents, setContents] = useState<string>("");
+  const [writer, setWriter] = useState<string>(defaultValue?.writer);
+  const [title, setTitle] = useState<string>(defaultValue?.contents);
+  const [contents, setContents] = useState<string>(defaultValue?.contents);
 
   const [createBoard] = useMutation(CREATEBOARD);
   const [updateBoard] = useMutation(UPDATEBOARD);
@@ -25,21 +25,29 @@ export default function BoardWrite(props) {
           contents: contents,
         },
       });
-      router.push(`/section09/09-03-boards/${result.data.createBoard.number}`);
+      router.push(`/section09/09-04-boards/${result.data.createBoard.number}`);
     } catch (err) {
       console.log(err);
     }
   };
 
   const onClickUpdate = async () => {
+    const myVariables: {
+      number: number;
+      writer?: string;
+      title?: string;
+      contents?: string;
+    } = {
+      number: Number(router.query.number),
+    };
+
+    if (writer) myVariables.writer = writer;
+    if (title) myVariables.title = title;
+    if (contents) myVariables.contents = contents;
+
     try {
       const result = await updateBoard({
-        variables: {
-          number: Number(router.query.number),
-          writer: writer,
-          title: title,
-          contents: contents,
-        },
+        variables: myVariables,
       });
       router.push(`/section09/09-04-boards/${result.data.updateBoard.number}`);
     } catch (err) {
@@ -63,6 +71,7 @@ export default function BoardWrite(props) {
       onChangeTitle={onChangeTitle}
       onChangeContents={onChangeContents}
       isEdit={isEdit}
+      defaultValue={defaultValue}
     />
   );
 }
