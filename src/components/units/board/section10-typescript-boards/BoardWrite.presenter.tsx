@@ -12,19 +12,19 @@ export default function BoardWriteUI(props: IBoardWriteUIPropsType) {
   } = props;
   return (
     <div style={{ width: "50%", display: "flex", flexDirection: "column" }}>
-      작성자 :{" "}
+      작성자 :
       <RedInput
         type="text"
         onChange={onChangeWriter}
         defaultValue={defaultValue?.writer}
       />
-      제목 :{" "}
+      제목 :
       <RedInput
         type="text"
         onChange={onChangeTitle}
         defaultValue={defaultValue?.title}
       />
-      내용 :{" "}
+      내용 :
       <RedInput
         type="text"
         onChange={onChangeContents}

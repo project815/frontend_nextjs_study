@@ -1,0 +1,14 @@
+schema: http://practice.codebootcamp.co.kr/graphql # 백엔드 주소
+
+generates:
+  ./src/commons/types/generated/types.ts:
+    plugins:
+      - typescript
+    config:
+      typesPrefix: I
+# generates:
+#   ./src/commons/types/generated/types.ts: #  다운로드 받을 경로
+#     plugins:
+#       - typescript
+#     config:
+#       typesPrefix: I

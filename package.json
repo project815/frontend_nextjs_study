@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "generate": "graphql-codegen"
   },
   "dependencies": {
     "@apollo/client": "^3.8.4",
@@ -23,9 +24,12 @@
     "styled-components": "^6.1.1"
   },
   "devDependencies": {
+    "@graphql-codegen/cli": "^5.0.0",
+    "@graphql-codegen/typescript": "^4.0.1",
     "@types/node": "20.7.1",
     "@types/react": "18.2.23",
     "eslint": "^8.50.0",
+    "ts-node": "^10.9.2",
     "typescript": "^5.3.3"
   }
 }
