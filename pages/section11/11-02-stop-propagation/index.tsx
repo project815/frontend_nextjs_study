@@ -1,4 +1,5 @@
 import { gql, useQuery } from "@apollo/client";
+import CheckBox from "./checkBox";
 
 const FETCHBOARDS = gql`
   query {
@@ -10,7 +11,7 @@ const FETCHBOARDS = gql`
     }
   }
 `;
-export default function Event() {
+export default function StopPropagation() {
   const { data } = useQuery(FETCHBOARDS);
   console.log("data : ", data);
 
@@ -21,6 +22,21 @@ export default function Event() {
 
     alert(`${e.currentTarget.id}님이 작성한 게시글입니다.`);
   };
+
+  const qqq1 = () => {
+    alert("클릭1");
+  };
+  const qqq2 = () => {
+    alert("클릭2");
+  };
+
+  const qqq4 = (e) => {
+    e.stopPropagation();
+    alert("클릭4");
+  };
+  const qqq5 = () => {
+    alert("클릭5");
+  };
   return (
     <div>
       {data &&
@@ -30,13 +46,13 @@ export default function Event() {
               key={i.number}
               style={{ marginTop: "10px" }}
               id={i.writer}
-              onClick={onClickContents}
+              onClick={qqq1}
             >
-              <span style={{ marginLeft: "4px" }}>
-                <input type="checkbox" />
+              <span style={{ marginLeft: "4px" }} onClick={qqq2}>
+                <CheckBox />
               </span>
-              <span>{i.number}</span>
-              <span style={{ marginLeft: "4px" }}>
+              <span onClick={qqq4}>{i.number}</span>
+              <span style={{ marginLeft: "4px" }} onClick={qqq5}>
                 작성자 : {i && i.writer}
               </span>
               <span style={{ marginLeft: "4px" }}>제목 : {i.title}</span>
