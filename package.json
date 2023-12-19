@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "generate": "graphql-codegen"
+    "generate": "graphql-codegen",
+    "prepare": "husky install"
   },
   "dependencies": {
     "@apollo/client": "^3.8.4",
