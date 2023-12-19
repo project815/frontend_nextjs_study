@@ -25,7 +25,7 @@ export default function GraphQlMutatioArgsPage() {
         },
       });
 
-      router.push(
+      await router.push(
         `05-05-dynamic-routing-board-query-moved/${result.data.createBoard.number}`
       );
     } catch (error) {

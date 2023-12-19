@@ -10,8 +10,12 @@ export default function Section09QuizProductDetailPage() {
     },
   });
 
-  const onClickMoveToEditPage = () => {
-    router.push(`/section09/quiz/${router.query.id}/edit`);
+  const onClickMoveToEditPage = async () => {
+    await router.push(
+      `/section09/quiz/${
+        typeof router.query.id === "string" ? router.query.id : ""
+      }/edit`
+    );
   };
 
   console.log("data : ", data);

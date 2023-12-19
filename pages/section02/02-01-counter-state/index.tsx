@@ -1,13 +1,13 @@
 import { useState } from "react";
 
-export default function CounterStatePage() {
+export default function CounterStatePage(): JSX.Element {
   const [count, setCount] = useState(0);
 
-  const onClickCountUp = () => {
+  const onClickCountUp = (): void => {
     setCount(count + 1);
   };
 
-  const onClickCountDown = () => {
+  const onClickCountDown = (): void => {
     setCount(count - 1);
   };
   return (

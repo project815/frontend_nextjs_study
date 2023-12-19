@@ -16,5 +16,5 @@ export default function Section09BoardEditPage() {
   return <BoardWrite isEdit={true} defaultValue={defaultValue?.fetchBoard} />;
 }
 
-//1. state의 초기값에 defaultValue를 널어주기
-//2. mutaion에서 수정된 값만 전달하기
+// 1. state의 초기값에 defaultValue를 널어주기
+// 2. mutaion에서 수정된 값만 전달하기

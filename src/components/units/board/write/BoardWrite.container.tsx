@@ -14,9 +14,9 @@ export default function BoardWrite() {
   const onClickSubmit = async () => {
     const result = await createBoard({
       variables: {
-        writer: writer,
-        title: title,
-        contents: contents,
+        writer,
+        title,
+        contents,
       },
     });
     console.log("data : ", result);
@@ -34,9 +34,9 @@ export default function BoardWrite() {
   return (
     <BoardWriteUI
       onClickSubmit={onClickSubmit}
-      onChangeWrite={onChangeWriter}
+      onChangeWriter={onChangeWriter}
       onChangeTitle={onChangeTitle}
-      onChnageContents={onChangeContents}
+      onChangeContents={onChangeContents}
     />
   );
 }

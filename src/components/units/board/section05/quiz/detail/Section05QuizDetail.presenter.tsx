@@ -1,6 +1,10 @@
 import * as S from "./Section05QuizeDetail.style";
 
-export default function Section05QuizDetailUI(props) {
+interface Propstype {
+  data?: any;
+}
+
+export default function Section05QuizDetailUI(props: Propstype) {
   const { data } = props;
   return (
     <S.ProductDetailLayOut>

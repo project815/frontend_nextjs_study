@@ -1,4 +1,4 @@
-import { gql, useMutation, useQuery } from "@apollo/client";
+import { gql, useMutation } from "@apollo/client";
 import axios from "axios";
 import { useState } from "react";
 
@@ -40,7 +40,7 @@ export default function Section04Quiz() {
     const result = await axios.get("https://koreanjson.com/posts/2");
     console.log("resulte : ", result);
   };
-  //## 1. GRAPHQL-API 요청하기
+  // ## 1. GRAPHQL-API 요청하기
 
   // 1. [ GRAPHQL-API 요청하기 ] 라는 버튼을 만들고, 이 버튼을 클릭했을 때
   // createBoard 라는 API에 mutation을 요청해서 프로필을 등록해 보세요.(작성자, 제목, 내용은 하드코딩합니다.)

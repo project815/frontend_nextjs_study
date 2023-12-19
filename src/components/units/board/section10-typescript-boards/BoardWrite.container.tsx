@@ -4,15 +4,17 @@ import { useState } from "react";
 import BoardWriteUI from "./BoardWrite.presenter";
 import { CREATEBOARD, UPDATEBOARD } from "./BoardWrite.query";
 import { useRouter } from "next/router";
-import { IBoardWritePropsType, IMyVariables } from "./BoardWrite.types";
+import type { IBoardWritePropsType, IMyVariables } from "./BoardWrite.types";
 
 export default function BoardWrite(props: IBoardWritePropsType) {
   const { isEdit, defaultValue } = props;
   const router = useRouter();
 
-  const [writer, setWriter] = useState<string>(defaultValue?.writer);
-  const [title, setTitle] = useState<string>(defaultValue?.contents);
-  const [contents, setContents] = useState<string>(defaultValue?.contents);
+  const [writer, setWriter] = useState<string>(defaultValue?.writer ?? "");
+  const [title, setTitle] = useState<string>(defaultValue?.contents ?? "");
+  const [contents, setContents] = useState<string>(
+    defaultValue?.contents ?? ""
+  );
 
   const [createBoard] = useMutation(CREATEBOARD);
   const [updateBoard] = useMutation(UPDATEBOARD);
@@ -21,13 +23,12 @@ export default function BoardWrite(props: IBoardWritePropsType) {
     try {
       const result = await createBoard({
         variables: {
-          writer: writer,
-          title: title,
-
-          contents: contents,
+          writer,
+          title,
+          contents,
         },
       });
-      router.push(
+      await router.push(
         `/section10/10-02-typescript-boards/${result.data.createBoard.number}`
       );
     } catch (err) {
@@ -48,7 +49,7 @@ export default function BoardWrite(props: IBoardWritePropsType) {
       const result = await updateBoard({
         variables: myVariables,
       });
-      router.push(
+      await router.push(
         `/section10/10-02-typescript-boards/${result.data.updateBoard.number}`
       );
     } catch (err) {

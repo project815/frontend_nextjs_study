@@ -1,0 +1,5 @@
+{
+  "editor.formatOptions": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "tapWidth": 3
+}

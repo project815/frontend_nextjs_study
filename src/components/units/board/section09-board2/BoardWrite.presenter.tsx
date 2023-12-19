@@ -1,6 +1,15 @@
+import type { Maybe } from "graphql/jsutils/Maybe";
+import type { IBoardReturn } from "../../../../commons/types/generated/types";
 import { BlueButton, RedInput } from "./BoardWrite.styles";
-
-export default function BoardWriteUI(props) {
+interface PropsType {
+  onClick: () => void;
+  onChangeWriter: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onChangeTitle: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onChangeContents: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  isEdit: boolean;
+  defaultValue?: Maybe<IBoardReturn> | undefined;
+}
+export default function BoardWriteUI(props: PropsType) {
   const {
     onClick,
     onChangeWriter,
@@ -15,19 +24,19 @@ export default function BoardWriteUI(props) {
       <RedInput
         type="text"
         onChange={onChangeWriter}
-        defaultValue={defaultValue?.writer}
+        defaultValue={defaultValue?.writer ?? ""}
       />
       제목 :{" "}
       <RedInput
         type="text"
         onChange={onChangeTitle}
-        defaultValue={defaultValue?.title}
+        defaultValue={defaultValue?.title ?? ""}
       />
       내용 :{" "}
       <RedInput
         type="text"
         onChange={onChangeContents}
-        defaultValue={defaultValue?.contents}
+        defaultValue={defaultValue?.contents ?? ""}
       />
       <BlueButton onClick={onClick}>{isEdit ? "수정" : "등록"}</BlueButton>
     </div>

@@ -1,6 +1,13 @@
 import * as S from "./Section05QuizNew.style";
+interface PropsType {
+  onChnagePrice: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onClickCreateProduct: (e: React.FormEvent<HTMLFormElement>) => void;
+  onChnageSeller: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onChnageDetail: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onChnageName: (e: React.ChangeEvent<HTMLInputElement>) => void;
+}
 
-export default function Section05QuizNewUI(props) {
+export default function Section05QuizNewUI(props: PropsType) {
   const {
     onChnagePrice,
     onClickCreateProduct,

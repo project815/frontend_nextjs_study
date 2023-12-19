@@ -1,4 +1,17 @@
-export default function Section09QuizProductUI(props) {
+import type { Maybe } from "graphql/jsutils/Maybe";
+import type { IProductReturn } from "../../../../commons/types/generated/types";
+
+interface PropsType {
+  isEdit: boolean;
+  defaultValue?: Maybe<IProductReturn> | undefined;
+  onChangeSeller: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onChangeName: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onChangeDetail: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onChangePrice: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onClickMoveToBack: () => void;
+  onCilckSubmit: () => void;
+}
+export default function Section09QuizProductUI(props: PropsType) {
   const {
     isEdit,
     defaultValue,
@@ -10,6 +23,8 @@ export default function Section09QuizProductUI(props) {
     onCilckSubmit,
   } = props;
 
+  console.log("??@@@@@@@ : ", defaultValue);
+
   return (
     <div>
       {isEdit ? (
@@ -20,7 +35,7 @@ export default function Section09QuizProductUI(props) {
           <input
             type="text"
             onChange={onChangeSeller}
-            defaultValue={defaultValue?.seller}
+            defaultValue={defaultValue?.seller ?? ""}
           />
         </div>
       )}
@@ -30,7 +45,7 @@ export default function Section09QuizProductUI(props) {
         <input
           type="text"
           onChange={onChangeName}
-          defaultValue={defaultValue?.name}
+          defaultValue={defaultValue?.name ?? ""}
         />
       </div>
       <div>
@@ -38,7 +53,7 @@ export default function Section09QuizProductUI(props) {
         <input
           type="text"
           onChange={onChangeDetail}
-          defaultValue={defaultValue?.detail}
+          defaultValue={defaultValue?.detail ?? ""}
         />
       </div>
       <div>
@@ -46,7 +61,7 @@ export default function Section09QuizProductUI(props) {
         <input
           type="number"
           onChange={onChangePrice}
-          defaultValue={defaultValue?.price}
+          defaultValue={defaultValue?.price ?? ""}
         />
       </div>
 

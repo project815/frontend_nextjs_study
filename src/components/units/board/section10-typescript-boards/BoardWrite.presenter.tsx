@@ -1,5 +1,5 @@
 import { BlueButton, RedInput } from "./BoardWrite.styles";
-import { IBoardWriteUIPropsType } from "./BoardWrite.types";
+import type { IBoardWriteUIPropsType } from "./BoardWrite.types";
 
 export default function BoardWriteUI(props: IBoardWriteUIPropsType) {
   const {

@@ -8,13 +8,14 @@ import {
 } from "../../../src/styles/02-quiz";
 
 export default function Section02QuizPage() {
-  let elementText: string = "안녕하세요.";
-  let elementCount: number = 0;
+  const elementText: string = "안녕하세요.";
+  const elementCount: number = 0;
   let elementAuthNumber: string = "000000";
 
   const [stateText, setstateText] = useState<string>("안녕하세요.");
   const [stattCount, setStateCount] = useState<number>(0);
   const [stateAuthNumber, setStateAuthNumber] = useState<string>("000000");
+  console.log("stateAuthNumber : ", stateAuthNumber);
   const authNumber = useRef("000000");
 
   const [email, setEmail] = useState<string>("");
@@ -24,13 +25,20 @@ export default function Section02QuizPage() {
   const [emailError, setEmailError] = useState<string>("Error");
   const [passwordError, setPasswordError] = useState<string>("Error");
 
-  //element
+  // element
   const onClickTextElementById = () => {
-    document.getElementById("elementtext").innerText = "반갑습니다.";
+    const element = document.getElementById("elementtext");
+
+    if (element) {
+      element.innerText = "반갑습니다.";
+    }
   };
   const onClickCountElementById = () => {
-    const num = Number(document.getElementById("elementcount").innerText) + 1;
-    document.getElementById("elementcount").innerText = String(num);
+    const element = document.getElementById("elementtext");
+    if (element) {
+      const num = Number(element.innerText) + 1;
+      element.innerText = String(num);
+    }
   };
   const onChangeAuthNumberElementById = (
     e: React.ChangeEvent<HTMLInputElement>
@@ -41,17 +49,20 @@ export default function Section02QuizPage() {
     if (!elementAuthNumber) {
       elementAuthNumber = "000000";
     }
-    document.getElementById("elementauthnumber").innerText = elementAuthNumber;
+    const element = document.getElementById("elementauthnumber");
+    if (element) {
+      element.innerText = elementAuthNumber;
+    }
   };
 
-  //UseState
+  // UseState
   const onClickStateChange = () => {
     setstateText("반갑습니다.");
   };
   const onClikckStateCount = () => {
     setStateCount(stattCount + 1);
   };
-  //useRef
+  // useRef
   const onChangeStateAuthNumber = (e: React.ChangeEvent<HTMLInputElement>) => {
     authNumber.current = e.target.value;
   };

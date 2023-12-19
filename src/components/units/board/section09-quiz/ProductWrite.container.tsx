@@ -4,14 +4,20 @@ import { useRouter } from "next/router";
 
 import Section09QuizProductUI from "./ProductWrite.presenter";
 import { CREATEPRODUCT, UPDATEPRODUCT } from "./ProductWrite.query";
-export default function Section09QuizProduct(props) {
+import type { IProductReturn } from "../../../../commons/types/generated/types";
+import type { Maybe } from "graphql/jsutils/Maybe";
+interface PropsType {
+  isEdit: boolean;
+  defaultValue?: Maybe<IProductReturn> | undefined;
+}
+export default function Section09QuizProduct(props: PropsType) {
   const { isEdit, defaultValue } = props;
   const router = useRouter();
 
-  const [seller, setSeller] = useState<string>(defaultValue?.seller);
-  const [name, setName] = useState<string>(defaultValue?.name);
-  const [detail, setDetail] = useState<string>(defaultValue?.detail);
-  const [price, setPrice] = useState<number>(defaultValue?.price);
+  const [seller, setSeller] = useState<string>(defaultValue?.seller ?? "");
+  const [name, setName] = useState<string>(defaultValue?.name ?? "");
+  const [detail, setDetail] = useState<string>(defaultValue?.detail ?? "");
+  const [price, setPrice] = useState<number>(defaultValue?.price ?? 0);
 
   const [createProudct] = useMutation(CREATEPRODUCT);
   const [updateProduct] = useMutation(UPDATEPRODUCT);
@@ -37,16 +43,16 @@ export default function Section09QuizProduct(props) {
     try {
       const result = await createProudct({
         variables: {
-          seller: seller,
+          seller,
           createProductInput: {
-            name: name,
-            detail: detail,
-            price: price,
+            name,
+            detail,
+            price,
           },
         },
       });
 
-      router.push(`/section09/quiz/${result.data.createProduct._id}`);
+      await router.push(`/section09/quiz/${result.data.createProduct._id}`);
     } catch (error) {
       console.log("error : ", error);
     }
@@ -60,7 +66,7 @@ export default function Section09QuizProduct(props) {
         price?: number;
       };
     } = {
-      productId: router.query.id,
+      productId: typeof router.query.id === "string" ? router.query.id : "",
       updateProductInput: {},
     };
     if (name) myVariables.updateProductInput.name = name;
@@ -71,7 +77,7 @@ export default function Section09QuizProduct(props) {
       const result = await updateProduct({
         variables: myVariables,
       });
-      router.push(`/section09/quiz/${result.data.updateProduct._id}`);
+      await router.push(`/section09/quiz/${result.data.updateProduct._id}`);
     } catch (error) {
       alert("변경사항이 없습니다.");
       console.log("error : ", error);

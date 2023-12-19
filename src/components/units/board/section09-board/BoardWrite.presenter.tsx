@@ -1,6 +1,13 @@
 import { BlueButton, RedInput } from "./BoardWrite.styles";
 
-export default function BoardWriteUI(props) {
+interface PropsType {
+  onClick: () => void;
+  onChangeWriter: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onChangeTitle: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onChangeContents: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  isEdit: boolean;
+}
+export default function BoardWriteUI(props: PropsType) {
   const { onClick, onChangeWriter, onChangeTitle, onChangeContents, isEdit } =
     props;
   return (

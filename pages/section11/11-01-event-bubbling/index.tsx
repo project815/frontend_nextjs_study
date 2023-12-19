@@ -10,7 +10,7 @@ const FETCHBOARDS = gql`
     }
   }
 `;
-export default function Event() {
+export default function EventBubbling() {
   const { data } = useQuery(FETCHBOARDS);
   console.log("data : ", data);
 
@@ -23,29 +23,26 @@ export default function Event() {
   };
   return (
     <div>
-      {data &&
-        data?.fetchBoards.map(
-          (i: { writer: string; contents: string; title: string; number }) => (
-            <div
-              key={i.number}
-              style={{ marginTop: "10px" }}
-              id={i.writer}
-              onClick={onClickContents}
-            >
-              <span style={{ marginLeft: "4px" }}>
-                <input type="checkbox" />
-              </span>
-              <span>{i.number}</span>
-              <span style={{ marginLeft: "4px" }}>
-                작성자 : {i && i.writer}
-              </span>
-              <span style={{ marginLeft: "4px" }}>제목 : {i.title}</span>
-              <span style={{ marginLeft: "4px" }}>
-                내용 : {i ? i.contents : ""}
-              </span>
-            </div>
-          )
-        )}
+      {data?.fetchBoards.map(
+        (i: { writer: string; contents: string; title: string; number }) => (
+          <div
+            key={i.number}
+            style={{ marginTop: "10px" }}
+            id={i.writer}
+            onClick={onClickContents}
+          >
+            <span style={{ marginLeft: "4px" }}>
+              <input type="checkbox" />
+            </span>
+            <span>{i.number}</span>
+            <span style={{ marginLeft: "4px" }}>작성자 : {i?.writer}</span>
+            <span style={{ marginLeft: "4px" }}>제목 : {i?.title}</span>
+            <span style={{ marginLeft: "4px" }}>
+              내용 : {i ? i.contents : ""}
+            </span>
+          </div>
+        )
+      )}
     </div>
   );
 }

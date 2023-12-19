@@ -3,16 +3,22 @@ import { useRouter } from "next/router";
 export default function DynamiccRoutingPage() {
   const router = useRouter();
 
-  const onClickMove1 = () => {
-    router.push("/section05/05-04-dynamic-routing-board-query-moved/20031");
+  const onClickMove1 = async () => {
+    await router.push(
+      "/section05/05-04-dynamic-routing-board-query-moved/20031"
+    );
   };
 
-  const onClickMove2 = () => {
-    router.push("/section05/05-04-dynamic-routing-board-query-moved/20001");
+  const onClickMove2 = async () => {
+    await router.push(
+      "/section05/05-04-dynamic-routing-board-query-moved/20001"
+    );
   };
 
-  const onClickMove3 = () => {
-    router.push("/section05/05-04-dynamic-routing-board-query-moved/19992");
+  const onClickMove3 = async () => {
+    await router.push(
+      "/section05/05-04-dynamic-routing-board-query-moved/19992"
+    );
   };
 
   return (

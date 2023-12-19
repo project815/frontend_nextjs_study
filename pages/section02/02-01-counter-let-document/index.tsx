@@ -1,13 +1,19 @@
-export default function CounterLetDocumentPage() {
-  const onClickCountUp = () => {
-    const count =
-      Number(document.getElementById("change_number").innerText) + 1;
-    document.getElementById("change_number").innerText = String(count);
+export default function CounterLetDocumentPage(): JSX.Element {
+  const onClickCountUp = (): void => {
+    const element = document.getElementById("change_number");
+
+    if (element) {
+      const count = Number(element.innerText) + 1;
+      element.innerText = String(count);
+    }
   };
   const onClickCountDown = () => {
-    const count =
-      Number(document.getElementById("change_number").innerText) + 1;
-    document.getElementById("change_number").innerText = String(count);
+    const element = document.getElementById("change_number");
+
+    if (element) {
+      const count = Number(element.innerText) + 1;
+      element.innerText = String(count);
+    }
   };
   return (
     <div>

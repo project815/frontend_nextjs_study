@@ -35,8 +35,6 @@ const tmpData = [
 
 export default function Section08Quiz2() {
   const [data, setData] = useState<any[]>([]);
-  const detectCheckbox = () => {};
-
   const onClickCheckbox = (e: React.ChangeEvent<HTMLInputElement>) => {
     console.log(e.target.checked);
     console.log(e.target.id);
@@ -110,31 +108,30 @@ export default function Section08Quiz2() {
             <th style={{ width: "30%" }}>작성일</th>
           </tr>
         </thead>
-        {data &&
-          data.map((i) => (
-            <tbody
-              key={i.number}
-              style={{
-                height: "50px",
-                borderBottom: "1px solid #E6E7E6",
-                borderTop: "1px solid #E6E7E6",
-              }}
-            >
-              <tr>
-                <th>
-                  <input
-                    id={String(i.number)}
-                    type="checkbox"
-                    onChange={onClickCheckbox}
-                    checked={i?.checked}
-                  />
-                </th>
-                <td style={{ textAlign: "center" }}>{i.number}</td>
-                <td style={{ paddingLeft: "20px" }}>{i.title}</td>
-                <td style={{ textAlign: "center" }}>{i.day}</td>
-              </tr>
-            </tbody>
-          ))}
+        {data.map((i) => (
+          <tbody
+            key={i.number}
+            style={{
+              height: "50px",
+              borderBottom: "1px solid #E6E7E6",
+              borderTop: "1px solid #E6E7E6",
+            }}
+          >
+            <tr>
+              <th>
+                <input
+                  id={String(i.number)}
+                  type="checkbox"
+                  onChange={onClickCheckbox}
+                  checked={i?.checked}
+                />
+              </th>
+              <td style={{ textAlign: "center" }}>{i.number}</td>
+              <td style={{ paddingLeft: "20px" }}>{i.title}</td>
+              <td style={{ textAlign: "center" }}>{i.day}</td>
+            </tr>
+          </tbody>
+        ))}
       </table>
       <button
         style={{

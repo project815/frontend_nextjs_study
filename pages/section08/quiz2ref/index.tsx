@@ -19,6 +19,12 @@ const MyTd = styled.td`
 `;
 // --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+interface ChecckType {
+  id: number;
+  data: string;
+  date: string;
+  checked?: boolean;
+}
 export default function Quiz02() {
   // 리스트에 뿌려줄 목업 데이터
   // --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -34,7 +40,7 @@ export default function Quiz02() {
 
   // 체크 할 때 마다 해당 id를 담아줄 배열
   // --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-  const [checkList, setCheckList] = useState([]);
+  const [checkList, setCheckList] = useState<ChecckType[]>([]);
   console.log("현재 체크리스트", checkList);
   // --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -43,7 +49,7 @@ export default function Quiz02() {
   const onClickCheckAll = () => {
     console.log("받아오는 데이터의 길이", dataList.length);
     console.log("현재 체크리스트에 들어있는 데이터의 길이", checkList.length);
-    //전체 데이터를 모두 넣으면 checked 조건에 부합함.
+    // 전체 데이터를 모두 넣으면 checked 조건에 부합함.
     if (checkList.length !== dataList.length) {
       setCheckList(dataList);
     } else {
@@ -65,10 +71,10 @@ export default function Quiz02() {
       setCheckList(result);
     }
 
-    //>>>//check안에 모든 id와 list.id가 겹치는 게 없으면 해당 list를 chekckList에 추가함
-    //>>>//그게 아니면, checkList에서 list.id가 아닌 것만 뽑아서 checkList를 재설정함.
+    // >>>//check안에 모든 id와 list.id가 겹치는 게 없으면 해당 list를 chekckList에 추가함
+    // >>>//그게 아니면, checkList에서 list.id가 아닌 것만 뽑아서 checkList를 재설정함.
 
-    //>>> 체크리스트 안에 list.id가 없으면 추가를 하고, 있으면 필터를 걸어서 해당 id를 제외한 배열을 체크리스트에 넣는다.
+    // >>> 체크리스트 안에 list.id가 없으면 추가를 하고, 있으면 필터를 걸어서 해당 id를 제외한 배열을 체크리스트에 넣는다.
   };
   // --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -88,7 +94,7 @@ export default function Quiz02() {
             <input
               type="checkbox"
               onChange={onClickCheckAll}
-              //체크리스트가 따로 있으니깐 그 갯수가 기존 데이터랑 같으면 checkd
+              // 체크리스트가 따로 있으니깐 그 갯수가 기존 데이터랑 같으면 checkd
               checked={checkList.length === dataList.length}
               style={{ marginTop: "5px" }}
             ></input>
@@ -102,7 +108,9 @@ export default function Quiz02() {
             <MyTd>
               <input
                 type="checkbox"
-                onChange={() => onCheckedItem(list)}
+                onChange={() => {
+                  onCheckedItem(list);
+                }}
                 checked={isChecked(list)}
                 style={{ marginTop: "5px" }}
               />

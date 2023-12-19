@@ -1,5 +1,5 @@
 import { MyEmail, MyInput } from "../../../src/styles/01-01-emotion.js";
-export default function EmotionPage() {
+export default function EmotionPage(): JSX.Element {
   return (
     <div>
       <MyEmail>이메일</MyEmail>

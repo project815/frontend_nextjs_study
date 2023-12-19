@@ -46,7 +46,7 @@ export default function Section05QuizNew() {
         },
       });
 
-      router.push(`/section05/quiz/${result.data.createProduct._id}`);
+      await router.push(`/section05/quiz/${result.data.createProduct._id}`);
     } catch (error) {
       console.log(error.message);
     }

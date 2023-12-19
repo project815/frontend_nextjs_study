@@ -1,6 +1,9 @@
+import type { Maybe } from "graphql/jsutils/Maybe";
+import type { IBoardReturn } from "../../../../commons/types/generated/types";
+
 export interface IBoardWritePropsType {
   isEdit: boolean;
-  defaultValue?: any;
+  defaultValue?: Maybe<IBoardReturn>;
 }
 export interface IBoardWriteUIPropsType {
   onClick: () => void;

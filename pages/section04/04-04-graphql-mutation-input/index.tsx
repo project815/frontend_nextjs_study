@@ -21,9 +21,9 @@ export default function GraphQlMutationInputPage() {
   const onClickCreateBoard = async () => {
     const result = await createBoard({
       variables: {
-        writer: writer,
-        title: title,
-        contents: contents,
+        writer,
+        title,
+        contents,
       },
     });
     console.log("data : ", result);

@@ -1,6 +1,6 @@
-//과일
+// 과일
 
-//컴포넌트 위에 만든 이유 : 컴포넌트가 리랜더링되도 다시 안 만들어지도록 하기 위해서
+// 컴포넌트 위에 만든 이유 : 컴포넌트가 리랜더링되도 다시 안 만들어지도록 하기 위해서
 const FRUITS = [
   { number: 1, title: "레드향" },
   { number: 2, title: "샤인머스켓" },
@@ -16,7 +16,7 @@ const FRUITS = [
 
 export default function MapFruitPage() {
   const fruit = FRUITS.map((ele) => (
-    <div>
+    <div key={ele.number}>
       {ele.number} {ele.title}
     </div>
   ));
@@ -24,13 +24,12 @@ export default function MapFruitPage() {
     <div>
       {fruit}
       <div>
-        {FRUITS &&
-          FRUITS.map((ele) => (
-            <div>
-              {ele.number} {ele.title}
-              <div></div>
-            </div>
-          ))}
+        {FRUITS?.map((ele) => (
+          <div key={ele.number}>
+            {ele.number} {ele.title}
+            <div></div>
+          </div>
+        ))}
       </div>
     </div>
   );

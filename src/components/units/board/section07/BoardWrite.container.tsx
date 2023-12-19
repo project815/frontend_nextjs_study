@@ -1,5 +1,5 @@
 import { useMutation } from "@apollo/client";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 import BoardWriteUI from "./BoardWrite.presenter";
 import { CREATEBOARD } from "./BoardWrite.query";
@@ -15,9 +15,9 @@ export default function BoardWrite() {
   const onClickSubmit = async () => {
     const result = await createBoard({
       variables: {
-        writer: writer,
-        title: title,
-        contents: contents,
+        writer,
+        title,
+        contents,
       },
     });
     console.log("data : ", result);

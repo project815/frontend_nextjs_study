@@ -1,4 +1,7 @@
-export default function SectionBoardComponentPage(props) {
+interface PropsType {
+  isEdit: boolean;
+}
+export default function SectionBoardComponentPage(props: PropsType) {
   const { isEdit } = props;
   return (
     <div>

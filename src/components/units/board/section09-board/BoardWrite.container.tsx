@@ -5,7 +5,10 @@ import BoardWriteUI from "./BoardWrite.presenter";
 import { CREATEBOARD, UPDATEBOARD } from "./BoardWrite.query";
 import { useRouter } from "next/router";
 
-export default function BoardWrite(props) {
+interface PropsType {
+  isEdit: boolean;
+}
+export default function BoardWrite(props: PropsType) {
   const { isEdit } = props;
   const router = useRouter();
 
@@ -20,12 +23,14 @@ export default function BoardWrite(props) {
     try {
       const result = await createBoard({
         variables: {
-          writer: writer,
-          title: title,
-          contents: contents,
+          writer,
+          title,
+          contents,
         },
       });
-      router.push(`/section09/09-03-boards/${result.data.createBoard.number}`);
+      await router.push(
+        `/section09/09-03-boards/${result.data.createBoard.number}`
+      );
     } catch (err) {
       console.log(err);
     }
@@ -36,12 +41,14 @@ export default function BoardWrite(props) {
       const result = await updateBoard({
         variables: {
           number: Number(router.query.number),
-          writer: writer,
-          title: title,
-          contents: contents,
+          writer,
+          title,
+          contents,
         },
       });
-      router.push(`/section09/09-04-boards/${result.data.updateBoard.number}`);
+      await router.push(
+        `/section09/09-04-boards/${result.data.updateBoard.number}`
+      );
     } catch (err) {
       console.log(err);
     }
