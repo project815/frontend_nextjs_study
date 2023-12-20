@@ -2,7 +2,7 @@ interface PropsType {
   school: string;
   children: JSX.Element;
 }
-export default function Example(props: PropsType) {
+export default function Example(props: PropsType): JSX.Element {
   return (
     <div>
       <div>안녕하세요. 맹구입니다.</div>
