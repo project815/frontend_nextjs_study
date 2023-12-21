@@ -20,8 +20,9 @@ export default function libraryStar(): JSX.Element {
       {/* <Rate onChange={onChangeStar} value={value} />; */}
       2단계
       {/* <Rate onChange={onChangeStar} value={value} />; */}
-      2단계
+      3단계
       {/* <Rate onChange={() => setValue} value={value} />; */}
+      4단계
       <Rate onChange={setValue} value={value} />;
     </>
   );
