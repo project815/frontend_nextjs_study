@@ -1,7 +1,9 @@
-schema: http://practice.codebootcamp.co.kr/graphql # 백엔드 주소
+# schema: http://practice.codebootcamp.co.kr/graphql # 백엔드 주소 ~section14
+
+schema: http://backend-practice.codebootcamp.co.kr/graphql # 백엔드 주소 section15~
 
 generates:
-  ./src/commons/types/generated/types.ts:
+  ./src/commons/types/generated2/types.ts:
     plugins:
       - typescript
     config:

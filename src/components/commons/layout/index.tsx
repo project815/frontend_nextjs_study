@@ -23,7 +23,7 @@ export default function Layout(props: ILayoutPropsType): JSX.Element {
       <div
         style={{
           display: "flex",
-          height: "500px",
+          height: "100%",
         }}
       >
         <div style={{ width: "100px", backgroundColor: "tomato" }}>
