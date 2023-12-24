@@ -34,9 +34,11 @@ export default function Pagination(props: PaginationPropsType) {
             prev{" "}
           </button>
         </span>
-        {new Array(10).fill("tmp").map((_, index) => (
-          <>
-            {index + startPage <= lastPage && (
+        {new Array(10)
+          .fill("tmp")
+          .filter((_, index) => index + startPage <= lastPage)
+          .map((_, index) => (
+            <>
               <span
                 id={String(index + startPage)}
                 onClick={onClickPage}
@@ -44,9 +46,8 @@ export default function Pagination(props: PaginationPropsType) {
               >
                 {index + startPage}
               </span>
-            )}
-          </>
-        ))}
+            </>
+          ))}
         <button onClick={onClickNextPage} disabled={startPage + 10 > lastPage}>
           next{" "}
         </button>
