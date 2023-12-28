@@ -10,11 +10,8 @@ interface ILayoutPropsType {
 }
 export default function Layout(props: ILayoutPropsType): JSX.Element {
   const router = useRouter();
-  console.log("router", router);
-  console.log("router", router.asPath);
   const isHiddenHeader = HIDDEN_HEADERS.includes(router.asPath);
 
-  console.log("isHiddenHeader", isHiddenHeader);
   return (
     <>
       {!isHiddenHeader ? <LayoutHeader /> : <></>}
