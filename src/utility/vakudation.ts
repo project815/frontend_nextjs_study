@@ -1,4 +1,6 @@
 export const CheckValidationFile = (file?: File): boolean => {
+  console.log("file : ", file.type.includes("png"));
+
   if (typeof file === "undefined") {
     alert("파일이 없습니다.");
     return false;
@@ -9,10 +11,10 @@ export const CheckValidationFile = (file?: File): boolean => {
     return false;
   }
 
-  if (!file.type.includes("png") || !file.type.includes("jpeg")) {
-    alert("파일이 이미지가 아닙니다.");
-    return false;
-  }
+  // if (!file.type.includes("png")) {
+  //   alert("파일이 이미지가 아닙니다.");
+  //   return false;
+  // }
 
   return true;
 };
