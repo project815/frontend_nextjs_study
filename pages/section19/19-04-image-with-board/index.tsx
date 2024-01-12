@@ -19,6 +19,7 @@ const CREATEBOARD = gql`
     }
   }
 `;
+
 const UPLOADFILE = gql`
   mutation uploadFile($file: Upload!) {
     uploadFile(file: $file) {
