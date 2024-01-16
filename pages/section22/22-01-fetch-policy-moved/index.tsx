@@ -15,6 +15,7 @@ const FETCHBOARDS = gql`
 export default function FetchPolicyMovedPage() {
   const { data } = useQuery<Pick<IQuery, "fetchBoards">>(FETCHBOARDS);
 
+  console.log("data : ", data);
   return (
     <div>
       {/* <div>
